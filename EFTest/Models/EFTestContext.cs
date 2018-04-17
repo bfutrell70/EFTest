@@ -26,6 +26,16 @@ namespace EFTest.Models
         {
             base.OnModelCreating(modelBuilder);
 
+            // plugs
+
+
+            // connectors
+
+
+            // cords
+
+
+            // lookups
 
         }
 
