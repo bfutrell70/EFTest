@@ -19,12 +19,14 @@ namespace EFTest.Models
 
         public EFTestContext(string connectionString) : base(connectionString)
         {
-            //Database.SetInitializer<DefaultContext>(null);
+            Database.SetInitializer<EFTestContext>(null);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+
         }
 
     }
