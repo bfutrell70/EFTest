@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Models\Connector.cs" />
     <Compile Include="Models\Cord.cs" />
+    <Compile Include="Models\DbContext.cs" />
     <Compile Include="Models\Lookup.cs" />
     <Compile Include="Models\Plug.cs" />
     <Compile Include="Program.cs" />
