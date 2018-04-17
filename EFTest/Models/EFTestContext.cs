@@ -27,8 +27,5 @@ namespace EFTest.Models
             base.OnModelCreating(modelBuilder);
         }
 
-
-
-
     }
 }
