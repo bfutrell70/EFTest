@@ -14,6 +14,7 @@ namespace EFTest.Models
 
         public string sku { get; set; }
 
-
+        // each connector should only match one lookup record.
+        public Lookup Lookup { get; set; }
     }
 }

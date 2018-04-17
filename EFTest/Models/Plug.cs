@@ -14,6 +14,8 @@ namespace EFTest.Models
 
         public string sku { get; set; }
 
+        // each plug should only match one lookup record.
+        public Lookup Lookup { get; set; }
 
     }
 }
