@@ -54,3 +54,6 @@ namespace EFTest.Models
 
             // lookups
             modelBuilder.Entity<Lookup>().ToTable("Lookups").HasKey(x => x.sku);
+        }
+    }
+}
