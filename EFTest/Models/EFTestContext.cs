@@ -24,8 +24,6 @@ namespace EFTest.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             //a bidirectional one-to-one-or-zero with cascade
             //modelBuilder.Entity<Project>().HasOptional(x => x.Detail)
             //.WithRequired(x => x.Project).WillCascadeOnDelete(true);
@@ -54,6 +52,8 @@ namespace EFTest.Models
 
             // lookups
             modelBuilder.Entity<Lookup>().ToTable("Lookups").HasKey(x => x.sku);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

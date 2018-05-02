@@ -32,6 +32,7 @@ namespace EFTest
                 plugs.Add(new Plug { Name = "Plug 3", sku = "3" });
                 plugs.Add(new Plug { Name = "Plug 4", sku = "4" });
                 Console.WriteLine("Added Plug data");
+                _context.SaveChanges();
             }
 
             var connectors = _context.Connectors;
@@ -44,6 +45,7 @@ namespace EFTest
                 connectors.Add(new Connector { Name = "Connector 7 Angled Right", sku = "7" });
                 connectors.Add(new Connector { Name = "Connector 8", sku = "8" });
                 Console.WriteLine("Added Connector data");
+                _context.SaveChanges();
             }
 
             var cords = _context.Cords;
@@ -56,6 +58,7 @@ namespace EFTest
                 cords.Add(new Cord { Name = "Cord 12", sku = "12" });
                 cords.Add(new Cord { Name = "Cord 13", sku = "13" });
                 Console.WriteLine("Added Cord data");
+                _context.SaveChanges();
             }
 
             var lookups = _context.Lookups;
@@ -73,6 +76,7 @@ namespace EFTest
                 lookups.Add(new Lookup { sku = "11", Price = 10.00m, Weight = 1.8m });
                 lookups.Add(new Lookup { sku = "13", Price = 1.20m, Weight = 1.9m });
                 Console.WriteLine("Added Lookup data");
+                _context.SaveChanges();
             }
         }
 
