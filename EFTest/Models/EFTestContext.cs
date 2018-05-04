@@ -24,36 +24,31 @@ namespace EFTest.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //a bidirectional one-to-one-or-zero with cascade
-            //modelBuilder.Entity<Project>().HasOptional(x => x.Detail)
-            //.WithRequired(x => x.Project).WillCascadeOnDelete(true);
-
             // plugs
             // plug has optional Lookup object
             // Lookup object has 0 or more Plug objects (straight/angled)
-            modelBuilder.Entity<Plug>().ToTable("Plugs").HasKey(x => x.uid).
-                HasOptional(x => x.Lookup).
-                WithMany(x => x.Plugs);
-
+            modelBuilder.Entity<Plug>().ToTable("Plugs").HasKey(x => x.uid);
+            //HasOptional(x => x.Lookup);
 
             // connectors
             // connector has optional Lookup object
             // Lookup object has 0 or more Connector objects (straight/angled)
-            modelBuilder.Entity<Connector>().ToTable("Connectors").HasKey(x => x.uid).
-                HasOptional(x => x.Lookup).
-                WithMany(x => x.Connectors);
-
+            modelBuilder.Entity<Connector>().ToTable("Connectors").HasKey(x => x.uid);
+            //HasOptional(x => x.Lookup);
 
             // cords
-            modelBuilder.Entity<Cord>().ToTable("Cords").HasKey(x => x.uid).
-                HasOptional(x => x.Lookup).
-                WithOptionalDependent(x => x.Cord);
-
+            modelBuilder.Entity<Cord>().ToTable("Cords").HasKey(x => x.uid);
+                //HasOptional(x => x.Lookup);
 
             // lookups
+            // a value can be in the lookup table but not be related to any plug, connector or cord record.
             modelBuilder.Entity<Lookup>().ToTable("Lookups").HasKey(x => x.sku);
+            modelBuilder.Entity<Lookup>().HasMany(x => x.Plugs).WithOptional().HasForeignKey(x => x.sku);
+            modelBuilder.Entity<Lookup>().HasMany(x => x.Connectors).WithOptional().HasForeignKey(x => x.sku);
+            modelBuilder.Entity<Lookup>().HasOptional(x => x.Cord);
 
-            base.OnModelCreating(modelBuilder);
+            // Looking at WebEngine's EUContext class it does not call tbe base class's OnModelCreating method
+            //base.OnModelCreating(modelBuilder);
         }
     }
 }
