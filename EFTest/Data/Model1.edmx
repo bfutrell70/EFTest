@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="Model1TargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="NewPlugs" EntityType="Model1.NewPlug" />
+          <EntitySet Name="NewConnectors" EntityType="Model1.NewConnector" />
+          <EntitySet Name="NewCords" EntityType="Model1.NewCord" />
+          <EntitySet Name="NewLookups" EntityType="Model1.NewLookup" />
+          <AssociationSet Name="NewConnectorToNewLookup" Association="Model1.NewConnectorToNewLookup">
+            <End Role="NewConnector" EntitySet="NewConnectors" />
+            <End Role="NewLookup" EntitySet="NewLookups" />
+          </AssociationSet>
+          <AssociationSet Name="NewPlugToNewLookup" Association="Model1.NewPlugToNewLookup">
+            <End Role="NewPlug" EntitySet="NewPlugs" />
+            <End Role="NewLookup" EntitySet="NewLookups" />
+          </AssociationSet>
+          <AssociationSet Name="NewCordToNewLookup" Association="Model1.NewCordToNewLookup">
+            <End Role="NewCord" EntitySet="NewCords" />
+            <End Role="NewLookup" EntitySet="NewLookups" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="NewPlug">
+          <Key>
+            <PropertyRef Name="NewPlugId" />
+          </Key>
+          <Property Name="NewPlugId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="NewLookup" Relationship="Model1.NewPlugToNewLookup" FromRole="NewPlug" ToRole="NewLookup" />
+        </EntityType>
+        <EntityType Name="NewConnector">
+          <Key>
+            <PropertyRef Name="NewConnectorId" />
+          </Key>
+          <Property Name="NewConnectorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="NewLookup" Relationship="Model1.NewConnectorToNewLookup" FromRole="NewConnector" ToRole="NewLookup" />
+        </EntityType>
+        <EntityType Name="NewCord">
+          <Key>
+            <PropertyRef Name="NewCordId" />
+          </Key>
+          <Property Name="NewCordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="NewLookup" Relationship="Model1.NewCordToNewLookup" FromRole="NewCord" ToRole="NewLookup" />
+        </EntityType>
+        <EntityType Name="NewLookup">
+          <Key>
+            <PropertyRef Name="Sku" />
+          </Key>
+          <Property Name="Sku" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Weight" Type="Decimal" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Plugs" />
+          <NavigationProperty Name="Connectors" />
+          <NavigationProperty Name="Cord" />
+          <NavigationProperty Name="NewConnectors" Relationship="Model1.NewConnectorToNewLookup" FromRole="NewLookup" ToRole="NewConnector" />
+          <NavigationProperty Name="NewPlugs" Relationship="Model1.NewPlugToNewLookup" FromRole="NewLookup" ToRole="NewPlug" />
+          <NavigationProperty Name="NewCord" Relationship="Model1.NewCordToNewLookup" FromRole="NewLookup" ToRole="NewCord" />
+        </EntityType>
+        <Association Name="NewConnectorToNewLookup">
+          <End Type="Model1.NewConnector" Role="NewConnector" Multiplicity="*" />
+          <End Type="Model1.NewLookup" Role="NewLookup" Multiplicity="1" >
+          </End>
+        </Association>
+        <Association Name="NewPlugToNewLookup">
+          <End Type="Model1.NewPlug" Role="NewPlug" Multiplicity="*" />
+          <End Type="Model1.NewLookup" Role="NewLookup" Multiplicity="1" />
+        </Association>
+        <Association Name="NewCordToNewLookup">
+          <End Type="Model1.NewCord" Role="NewCord" Multiplicity="0..1" />
+          <End Type="Model1.NewLookup" Role="NewLookup" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model1" />
+        <Alias Key="Target" Value="Model1.Store" />
+        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1TargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
