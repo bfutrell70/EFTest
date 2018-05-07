@@ -47,7 +47,7 @@ namespace EFTest.Models
             modelBuilder.Entity<Lookup>().HasMany(x => x.Connectors).WithOptional().HasForeignKey(x => x.sku);
             modelBuilder.Entity<Lookup>().HasOptional(x => x.Cord);
 
-            // Looking at WebEngine's EUContext class it does not call tbe base class's OnModelCreating method
+            // Looking at WebEngine's EUContext class it does not call the base class's OnModelCreating method
             //base.OnModelCreating(modelBuilder);
         }
     }
