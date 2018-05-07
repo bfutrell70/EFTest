@@ -37,6 +37,7 @@
           <Property Name="NewPlugId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="NewLookup" Relationship="Model1.NewPlugToNewLookup" FromRole="NewPlug" ToRole="NewLookup" />
+          <Property Name="Sku" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="NewConnector">
           <Key>
@@ -45,6 +46,7 @@
           <Property Name="NewConnectorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="NewLookup" Relationship="Model1.NewConnectorToNewLookup" FromRole="NewConnector" ToRole="NewLookup" />
+          <Property Name="Sku" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="NewCord">
           <Key>
@@ -53,6 +55,7 @@
           <Property Name="NewCordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="NewLookup" Relationship="Model1.NewCordToNewLookup" FromRole="NewCord" ToRole="NewLookup" />
+          <Property Name="Sku" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="NewLookup">
           <Key>
@@ -72,14 +75,38 @@
           <End Type="Model1.NewConnector" Role="NewConnector" Multiplicity="*" />
           <End Type="Model1.NewLookup" Role="NewLookup" Multiplicity="1" >
           </End>
+          <ReferentialConstraint>
+            <Principal Role="NewLookup">
+              <PropertyRef Name="Sku" />
+            </Principal>
+            <Dependent Role="NewConnector">
+              <PropertyRef Name="Sku" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="NewPlugToNewLookup">
           <End Type="Model1.NewPlug" Role="NewPlug" Multiplicity="*" />
           <End Type="Model1.NewLookup" Role="NewLookup" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="NewLookup">
+              <PropertyRef Name="Sku" />
+            </Principal>
+            <Dependent Role="NewPlug">
+              <PropertyRef Name="Sku" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="NewCordToNewLookup">
           <End Type="Model1.NewCord" Role="NewCord" Multiplicity="0..1" />
           <End Type="Model1.NewLookup" Role="NewLookup" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="NewLookup">
+              <PropertyRef Name="Sku" />
+            </Principal>
+            <Dependent Role="NewCord">
+              <PropertyRef Name="Sku" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
